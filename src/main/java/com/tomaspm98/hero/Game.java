@@ -15,9 +15,9 @@ import static com.googlecode.lanterna.input.KeyType.ArrowUp;
 
 public class Game {
     Screen screen;
-    private int x=10;
-    private int y=10;
+    Hero hero;
     Game() {
+        hero = new Hero(10,10);
         try {
             Terminal terminal = new DefaultTerminalFactory().createTerminal();
             screen = new TerminalScreen(terminal);
@@ -29,7 +29,7 @@ public class Game {
             screen.startScreen();
             screen.doResizeIfNecessary();
             screen.clear();
-            screen.setCharacter(x,y, TextCharacter.fromCharacter('X')[0]);
+            screen.setCharacter(hero.getX(),hero.getY(), TextCharacter.fromCharacter('X')[0]);
             screen.refresh();
         } catch (IOException e){
             e.printStackTrace();
@@ -37,7 +37,7 @@ public class Game {
     }
     private void draw() throws IOException {
         screen.clear();
-        screen.setCharacter(x, y, TextCharacter.fromCharacter('X')[0]);
+        screen.setCharacter(hero.getX(), hero.getY(), TextCharacter.fromCharacter('X')[0]);
         screen.refresh();
     }
 
@@ -59,16 +59,16 @@ public class Game {
         //System.out.println(key);
         switch (key.getKeyType()){
             case ArrowUp:
-                y--;
+                hero.moveUp();
                 break;
             case ArrowDown:
-                y++;
+                hero.moveDown();
                 break;
             case ArrowLeft:
-                x--;
+                hero.moveLeft();
                 break;
             case ArrowRight:
-                x++;
+                hero.moveRight();
                 break;
             default: break;
         }
