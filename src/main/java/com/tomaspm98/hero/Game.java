@@ -15,32 +15,32 @@ import static com.googlecode.lanterna.input.KeyType.ArrowUp;
 
 public class Game {
     Screen screen;
-    Position position=new Position(10,10);
-    Hero hero;
-    //Arena arena;
+    //Position position=new Position(10,10);
+    //Hero hero;
+    Arena arena;
+
     Game() {
-        hero = new Hero(position);
-        //arena=new Arena(20,20);
+        //hero = new Hero(position);
+        arena=new Arena(20,20);
         try {
             Terminal terminal = new DefaultTerminalFactory().createTerminal();
             screen = new TerminalScreen(terminal);
-            TerminalSize terminalSize=new TerminalSize(40,20);
-            DefaultTerminalFactory terminalFactory=new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
-            Terminal terminal1 =terminalFactory.createTerminal();
+            //TerminalSize terminalSize=new TerminalSize(40,20);
+            //DefaultTerminalFactory terminalFactory=new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
+            //Terminal terminal1 =terminalFactory.createTerminal();
 
             screen.setCursorPosition(null);
             screen.startScreen();
             screen.doResizeIfNecessary();
-            screen.clear();
-            screen.setCharacter(position.getX(),position.getY(), TextCharacter.fromCharacter('X')[0]);
-            screen.refresh();
+
         } catch (IOException e){
             e.printStackTrace();
         }
     }
     private void draw() throws IOException {
         screen.clear();
-        hero.draw(screen);
+        arena.draw(screen.newTextGraphics());
+        arena.draw1(screen);
         screen.refresh();
     }
 
@@ -58,15 +58,15 @@ public class Game {
      game.run();
     }
 
-    /*private void processKey (com.googlecode.lanterna.input.KeyStroke key) throws IOException {
+    private void processKey (com.googlecode.lanterna.input.KeyStroke key) throws IOException {
         arena.processKey(key);
-    }*/
-
-    private void moveHero(Position position) {
-        hero.setPosition(position);
     }
 
-    private void processKey (com.googlecode.lanterna.input.KeyStroke key) throws IOException {
+    /*private void moveHero(Position position) {
+        hero.setPosition(position);
+    }
+*/
+   /* private void processKey (com.googlecode.lanterna.input.KeyStroke key) throws IOException {
         //System.out.println(key);
         switch (key.getKeyType()){
             case ArrowUp:
@@ -83,7 +83,7 @@ public class Game {
                 break;
             default: break;
         }
-    }
+    }*/
 
 
 }
