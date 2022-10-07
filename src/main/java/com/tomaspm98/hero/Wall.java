@@ -6,16 +6,18 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 
 import java.util.List;
 
-public class Wall {
-    Position position;
+public class Wall extends Element {
+    //Position position;
 
-    Wall (Position position){
-        this.position=position;
+    public Wall (int x, int y){
+        super(x,y);
     }
 
     public Position getPosition(){
         return position;
     }
+
+    public void setPosition(Position position){this.position=position;}
 
 
 
