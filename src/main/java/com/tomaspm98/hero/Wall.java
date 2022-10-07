@@ -23,7 +23,7 @@ public class Wall extends Element {
 
     public void draw(TextGraphics graphics) {
         graphics.setBackgroundColor(TextColor.Factory.fromString("#FF5722"));
-        //graphics.putString(new TerminalPosition(position.getX(), position.getY()), " ");
+        graphics.putString(new TerminalPosition(position.getX(), position.getY()), " ");
     }
 
 

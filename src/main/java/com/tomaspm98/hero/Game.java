@@ -19,9 +19,9 @@ public class Game {
     //Hero hero;
     Arena arena;
 
-    Game() {
+    Game(int width, int height) {
         //hero = new Hero(position);
-        arena=new Arena(20,20);
+        arena=new Arena(width,height);
         try {
             Terminal terminal = new DefaultTerminalFactory().createTerminal();
             screen = new TerminalScreen(terminal);
@@ -53,10 +53,10 @@ public class Game {
             if (key.getKeyType()==KeyType.EOF){ break;}
         }
     }
-    public static void main(String[] args) throws IOException {
+   /* public static void main(String[] args) throws IOException {
      Game game=new Game();
      game.run();
-    }
+    }*/
 
     private void processKey (com.googlecode.lanterna.input.KeyStroke key) throws IOException {
         arena.processKey(key);

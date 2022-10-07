@@ -7,12 +7,14 @@ import com.googlecode.lanterna.screen.Screen;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Arena {
     private int width;
     private int height;
 
     private List<Wall> walls;
+    private List<Coin> coins;
 
     public Hero hero;
 
@@ -25,6 +27,7 @@ public class Arena {
         this.height = height;
         hero = new Hero (width/2,height/2);
         this.walls=createWalls();
+        this.coins=createCoins();
     }
 
     public void draw1(Screen screen) {
@@ -75,6 +78,10 @@ public class Arena {
         for (Wall wall:walls){
             wall.draw(graphics);
         }
+
+       for (Coin coin:coins){
+            coin.draw(graphics);
+        }
     }
 
     private List<Wall> createWalls() {
@@ -88,6 +95,22 @@ public class Arena {
             walls.add(new Wall(width - 1, r));
         }
         return walls;
+    }
+
+    private List<Coin> createCoins() {
+        Random random = new Random();
+        ArrayList<Coin> coins = new ArrayList<>();
+        for (int i = 0; i < 5; i++)
+            coins.add(new Coin(random.nextInt(width - 2) + 1,  random.nextInt(height - 2) + 1));
+        return coins;
+    }
+
+    private void retrieveCoins() {
+        for (Coin coin : coins)
+            if (hero.getPosition().equals(coin.getPosition())) {
+                coins.remove(coin);
+                break;
+            }
     }
 
 }
